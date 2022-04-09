@@ -3,12 +3,15 @@ import requests
 from random import choice
 from bs4 import BeautifulSoup
 from cfg import token
+
 bot = telebot.TeleBot(token)
 #Ниже представлен массив с user-agent'ами для обхода блок-ки сайтом
 user_agentz = ['Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Avast/70.0.917.102', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/538 (KHTML, like Gecko) Chrome/36 Safari/538', 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2599.0 Safari/537.36']
 HEADERS = {
     'user-agent': choice(user_agentz)
 }
+
+
 def Get_Weather():
     try:
         stats = []
@@ -23,6 +26,7 @@ def Get_Weather():
     except Exception as e:
         print(repr(e))
         return []
+    
 @bot.message_handler(commands=['start'])
 def Welcom_mess(message):
     try:
@@ -32,6 +36,7 @@ def Welcom_mess(message):
         print('------START------\n\n')
         print(repr(e))
         pass
+    
 @bot.message_handler(commands=['day'])
 def Weather(message):
     try:
@@ -44,4 +49,5 @@ def Weather(message):
         print('------WEATHER------\n\n')
         print(repr(e))
         pass
+    
 bot.polling(none_stop=True)
